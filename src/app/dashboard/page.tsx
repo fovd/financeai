@@ -1,8 +1,21 @@
+'use client'
+
 import Link from 'next/link'
+import { useState } from 'react'
+import AnalysisPopup from './AnalysisPopup'
 
 export default function Dashboard() {
+  const [isAnalysisPopupOpen, setIsAnalysisPopupOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Analysis Configuration Popup */}
+      <AnalysisPopup
+        isOpen={isAnalysisPopupOpen}
+        onClose={() => setIsAnalysisPopupOpen(false)}
+        fileName="Q4 2023 Financial Report.pdf"
+      />
+
       {/* Dashboard Navigation */}
       <nav className="fixed top-0 w-full bg-white border-b border-gray-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,6 +47,17 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Test Button */}
+          <div className="mb-8">
+            <button
+              onClick={() => setIsAnalysisPopupOpen(true)}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            >
+              <span className="material-icons-round">science</span>
+              Test Analysis Popup
+            </button>
+          </div>
+
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             {[
